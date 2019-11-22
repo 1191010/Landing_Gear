@@ -1,0 +1,4 @@
+/*Declaration of Delay functionality using Clock Cycle.
+void delay(int number_of_seconds);
+int clock_t start_time;
+Clock();

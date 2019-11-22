@@ -1,0 +1,25 @@
+#include"Initialize_Var.h"
+#include"Constants.h"
+
+
+// One Time call for Initialization on power ON
+Void Initialize_Variables() 
+{
+
+   //Set Monitorable variables status to initial state as of extension
+   Set Bool_GearPosition_Status = DOWN;
+   Set Bool_AnalogSwitch_Status = OPENED;
+   set BOOL_DoorClosed_Status = CLOSED;
+   Set Bool_DoorOpen_Status = NOTOPEN;   
+   Set Bool_Retracted_Status = NOTRETRACTED;
+   Set Bool_Extended_Status = EXTENDED;
+   Set Bool_ShockAbs_Status = UNRELAXED;
+   Set Enum_Feedabck_State = GREEN;
+   
+  //Set Key Status
+  Set Key = Extension ;   
+
+  //Set Prev Key Status
+  Set PrevKey = Extension ; 
+
+}

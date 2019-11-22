@@ -1,0 +1,24 @@
+#include"GearFailures.h"
+
+
+Void GearRetractFailure(BOOL Bool_DoorOpen_Status ,BOOL BOOL_DoorClosed_Status)
+{
+
+
+\\ Log a Fault saying Gear Retraction Failure
+
+
+}
+
+
+
+
+GearExtendFailure(BOOL Bool_Extended_Status ,BOOL Bool_Retracted_Status)
+{
+
+
+\\ Log a Fault saying Gear Extension Failure
+
+
+
+}

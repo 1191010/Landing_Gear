@@ -1,0 +1,4 @@
+
+
+Void DoorOpenFailure(BOOL Bool_DoorOpen_Status ,BOOL BOOL_DoorClosed_Status);
+Void DoorOpenFailure(BOOL Bool_DoorClosed_Status ,BOOL BOOL_DoorOpen_Status);

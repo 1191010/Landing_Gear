@@ -1,0 +1,68 @@
+/* Landing Gear Control Software Code */
+#include<stdio.h>
+#include"Constants.h"
+#include"Initialize_Var.h"
+#include"Clock.h"
+#include"Retraction.h"
+#include"Extension.h"
+
+
+
+// One time call to Initialize all variables 
+Initialize()
+{
+
+Initialize_Variables();
+
+}
+
+
+// Operating at 10ms
+
+Main()
+
+{
+
+
+// Read Input Key Status from H/W 
+Key = ReadInput ();
+
+
+// Operate as per Retraction Key I/P, Retraction Functionality
+If(Key == Retraction)
+{
+   If ((Key == Retraction)&& (prevKey == Extension))
+   {
+
+      Retraction();       
+      PrevKey = Retraction;
+  
+   }
+   Else
+   {
+
+    // DO Nothing    
+
+   }
+
+}
+
+
+// Extension functionality
+
+Else
+{
+
+   // Operate as per Retraction Key I/P
+   If ((Key == Extension)&& (prevKey == Retraction))
+   {
+      Extension();      
+      PrevKey = Extension;         
+   }
+   Else
+   {
+     // DO Nothing
+   }
+
+
+}

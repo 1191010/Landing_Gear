@@ -1,0 +1,24 @@
+#include"DoorFailures.h"
+
+
+Void DoorOpenFailure(BOOL Bool_DoorOpen_Status ,BOOL BOOL_DoorClosed_Status)
+{
+
+
+\\ Log a Fault saying Door Open Failure
+
+
+}
+
+
+
+
+Void DoorCloseFailure(BOOL BOOL_DoorClosed_Status,BOOL Bool_DoorOpen_Status)
+{
+
+
+
+\\ Log a Fault saying Door Close Failure
+
+
+}

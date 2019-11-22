@@ -1,0 +1,10 @@
+
+
+
+BOOL ReadInput()
+{
+
+\\ Read Input discrete Pin from H/W
+
+
+}

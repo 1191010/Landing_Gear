@@ -1,0 +1,2 @@
+GearRetractFailure(Bool_Retracted_Status ,Bool_Extended_Status);
+GearExtendFailure(Bool_Extended_Status ,Bool_Retracted_Status);

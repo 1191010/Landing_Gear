@@ -1,0 +1,114 @@
+#include"Retraction.h"
+
+Void Retraction()
+{
+
+   //Set Controllable variables status to default 
+   Set Bool_GenEv_Cmd = CLOSE;
+   Set Bool_DoorOpen_Cmd = CLOSE;
+   Set Bool_DoorClose_Cmd = CLOSE;  
+   Set Bool_GearRetract_Cmd = CLOSE;
+   Set Bool_GearExtend_Cmd = CLOSE; 
+
+
+   // Open General EV and send command to open the Door
+   Set Bool_GenEv_Cmd = OPEN;     
+   Set Bool_DoorOpen_Cmd OPEN;
+
+   putGenEv(OPEN);
+   putDoorDoorOpencmd(OPEN);
+
+   // Delay of approx 7 sec to Open the DOOR and read the status of DOOR OPEN and DOOR CLOSED 
+   delay(7) 
+
+   Bool_DoorOpen_Status = getDoorOpenStatus();
+   BOOL_DoorClosed_Status = getDoorClosedStatus();
+
+   // Gears are in Transition to retract based on the Door Status
+   If ( (Bool_DoorOpen_Status == OPENED) AND (BOOL_DoorClosed_Status == NOTCLOSED) )    
+   {
+      Set Bool_DoorOpen_Cmd = CLOSE;
+      Set Bool_Feedabck_State = AMBER;
+      
+      putDoorClosedCmd(CLOSE);
+      putFeedBackState(AMBER);
+
+   }
+
+   Else
+   { 
+      // Detect Door Open Failure if 7 sec are timed out
+      DoorOpenFailure(Bool_DoorOpen_Status , BOOL_DoorClosed_Status);  
+
+   }
+
+
+    Bool_ShockAbs_Status = getShockAbsorberStatus(); 
+    
+    // Check Shock Absorber Status and send retraction command or else remain extended
+    If ( (Bool_ShockAbs_Status  == RELAXED) )
+    {  
+       // Send Command to retract the gears 
+       Set Bool_GearRetract_Cmd = OPEN;
+       putGearRetractCmd(OPEN);
+    }
+
+    Else
+    {
+       // Remain Extended
+       Set Bool_Feedabck_State = GREEN;      
+       Set Bool_DoorClose_Cmd = OPEN;
+       putFeedBackState(GREEN);
+       putDoorClosedCmd(OPEN);
+
+    } 
+
+    delay(7 Sec)
+
+    Bool_Retracted_Status = getGearRetractedStatus(); 
+    Bool_Extended_Status = getGearExtendedStatus();  
+
+   // Check Retracted Status      
+   If (( Bool_Retracted_Status == RETRACTED) AND  ( Bool_Extended_Status == NOTEXTENDED) )
+   {
+      Set Bool_GearRetract_Cmd = CLOSE;
+      Set Enum_Feedabck_State = OFF; 
+      Set Bool_DoorClosed_Cmd = OPEN;
+      
+      // Retract the Landing Gear and turn off the Feedback indicator
+      putGearRetractCmd(CLOSE);
+      putFeedBackState(OFF);   
+      putDoorClosedCmd(OPEN);
+
+      delay(7 Sec)
+
+     
+      Bool_DoorOpen_Status = getDoorOpenStatus();
+      BOOL_DoorClosed_Status = getDoorClosedStatus();   
+    
+      // Close the Door &  General EV 
+      If ((BOOL_DoorClosed_Status  == CLOSED) AND ((Bool_DoorOpen_Status == NOTOPEN ) )
+      {
+         Set Bool_DoorClose_Cmd = CLOSE;
+         Set Bool_GenEv_Cmd =  CLOSE;
+         
+         putDoorClosedCmd(CLOSE);
+         putGenEv(CLOSE);                      
+      }
+      
+      Else
+      {
+         // Detect Door Close Failure if 7 sec are timed out
+         DoorCloseFailure(BOOL_DoorClosed_Status, Bool_DoorOpen_Status);
+
+      }
+   }
+
+   Else
+   {
+     // Detect failure to retract the gears after 7 sec is also timed out 
+      GearRetractFailure(Bool_Retracted_Status ,Bool_Extended_Status);
+
+   }
+
+}

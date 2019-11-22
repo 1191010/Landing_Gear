@@ -1,0 +1,16 @@
+#include<stdio.h>   
+
+Void Initialize_Variables();
+
+BOOL Bool_GearPosition_Status;
+BOOL Bool_AnalogSwitch_Status;
+BOOL BOOL_DoorClosed_Status;
+BOOL Bool_DoorOpen_Status;   
+BOOL Bool_Retracted_Status;
+BOOL Bool_Extended_Status
+BOOL Bool_ShockAbs_Status;
+BOOL Enum_Feedabck_State; 
+
+BOOL Key ;   
+BOOL PrevKey ;
+   
